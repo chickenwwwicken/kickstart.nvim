@@ -271,6 +271,10 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+-- NOTE:
+-- NOTE: lazy.nvim lazy.nvim lazy.nvim lazy.nvim lazy.nvim
+-- NOTE:
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -307,6 +311,10 @@ require('lazy').setup({
   --
   -- Use `opts = {}` to automatically pass options to a plugin's `setup()` function, forcing the plugin to be loaded.
   --
+
+  -- NOTE:
+  -- NOTE: gitsigns gitsigns gitsigns gitsign gitsigns
+  -- NOTE:
 
   -- Alternatively, use `config = function() ... end` for full control over the configuration.
   -- If you prefer to call `setup` explicitly, use:
@@ -349,6 +357,10 @@ require('lazy').setup({
   --
   -- Then, because we use the `opts` key (recommended), the configuration runs
   -- after the plugin has been loaded as `require(MODULE).setup(opts)`.
+
+  -- NOTE:
+  -- NOTE: which-key which-key which-key which-key which-key
+  -- NOTE:
 
   { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
@@ -409,6 +421,10 @@ require('lazy').setup({
   -- you do for a plugin at the top level, you can do for a dependency.
   --
   -- Use the `dependencies` key to specify the dependencies of a particular plugin
+
+  -- NOTE:
+  -- NOTE: telescope telescope telescope telescope telescope
+  -- NOTE:
 
   { -- Fuzzy Finder (files, lsp, etc)
     'nvim-telescope/telescope.nvim',
@@ -514,6 +530,10 @@ require('lazy').setup({
     end,
   },
 
+  -- NOTE:
+  -- NOTE: lazydev lsp lazydev lsp lazydev lsp lazydev lsp lazydev lsp
+  -- NOTE:
+
   -- LSP Plugins
   {
     -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
@@ -527,6 +547,11 @@ require('lazy').setup({
       },
     },
   },
+
+  -- NOTE:
+  -- NOTE: lspconfig lspconfig lspconfig lspconfig lspconfig lspconfig
+  -- NOTE:
+
   {
     -- Main LSP Configuration
     'neovim/nvim-lspconfig',
@@ -788,6 +813,10 @@ require('lazy').setup({
     end,
   },
 
+  -- NOTE:
+  -- NOTE: autoformat conform autoformat conform autoformat conform
+  -- NOTE:
+
   { -- Autoformat
     'stevearc/conform.nvim',
     event = { 'BufWritePre' },
@@ -828,6 +857,10 @@ require('lazy').setup({
       },
     },
   },
+
+  -- NOTE:
+  -- NOTE: autocompletion blink autocompletion blink autocompletion blink
+  -- NOTE:
 
   { -- Autocompletion
     'saghen/blink.cmp',
@@ -928,6 +961,10 @@ require('lazy').setup({
     },
   },
 
+  -- NOTE:
+  -- NOTE: tokyonight theme tokyonight theme tokyonight theme tokyonight theme
+  -- NOTE:
+
   { -- You can easily change to a different colorscheme.
     -- Change the name of the colorscheme plugin below, and then
     -- change the command in the config to whatever the name of that colorscheme is.
@@ -950,8 +987,16 @@ require('lazy').setup({
     end,
   },
 
+  -- NOTE:
+  -- NOTE: todo-comments todo-comments todo-comments todo-comments
+  -- NOTE:
+
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
+
+  -- NOTE:
+  -- NOTE: mini.nvim mini.nvim mini.nvim mini.nvim mini.nvim mini.nvim
+  -- NOTE:
 
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
@@ -990,6 +1035,9 @@ require('lazy').setup({
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
   },
+  -- NOTE:
+  -- NOTE: treesitter treesitter treesitter treesitter treesitter
+  -- NOTE:
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
@@ -1015,6 +1063,100 @@ require('lazy').setup({
     --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
     --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
   },
+
+  -- NOTE: pimpin pimpin pimpin pimpin pimpin pimpin pimpin pimpin pimpin
+  -- NOTE: pimpin pimpin pimpin pimpin pimpin pimpin pimpin pimpin pimpin
+  -- NOTE: pimpin pimpin pimpin pimpin pimpin pimpin pimpin pimpin pimpin
+
+  -- NOTE: obsidian obsidian obsidian obsidian obsidian obsidian obsidian
+  {
+    'epwalsh/obsidian.nvim',
+    version = '*', -- recommended, use latest release instead of latest commit
+    lazy = true,
+    ft = 'markdown',
+    -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
+    -- event = {
+    --   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
+    --   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/*.md"
+    --   -- refer to `:h file-pattern` for more examples
+    --   "BufReadPre path/to/my-vault/*.md",
+    --   "BufNewFile path/to/my-vault/*.md",
+    -- },
+    event = {
+      'BufReadPre ' .. vim.fn.expand '~' .. '/yeti/*.md',
+      'BufNewFile ' .. vim.fn.expand '~' .. '/yeti/*.md',
+    },
+    dependencies = {
+      -- Required.
+      'nvim-lua/plenary.nvim',
+    },
+    opts = {
+      workspaces = {
+        {
+          name = 'yeti',
+          path = '~/yeti',
+        },
+      },
+      completion = {
+        -- set to false to disable completion
+        nvim_cmp = true,
+        -- trigger completion at 2 chars.
+        min_chars = 2,
+      },
+      -- put new notes in the same directory as the current buffer.
+      new_notes_location = 'current_dir',
+      mappings = {
+        -- "obsidian follow"
+        ['<leader>of'] = {
+          action = function()
+            return require('obsidian').util.gf_passthrough()
+          end,
+          opts = { noremap = false, expr = true, buffer = true },
+        },
+        -- toggle check-boxes "obsidian done"
+        ['<leader>od'] = {
+          action = function()
+            return require('obsidian').util.toggle_checkbox()
+          end,
+          opts = { buffer = true },
+        },
+      },
+    },
+
+    note_frontmatter_func = function(note)
+      -- Add the title of the note as an alias.
+      if note.title then
+        note:add_alias(note.title)
+      end
+
+      local out = { id = note.id, aliases = note.aliases, tags = note.tags }
+
+      -- `note.metadata` contains any manually added fields in the frontmatter.
+      -- So here we just make sure those fields are kept in the frontmatter.
+      if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
+        for k, v in pairs(note.metadata) do
+          out[k] = v
+        end
+      end
+
+      return out
+    end,
+
+    templates = {
+      subdir = 'templates',
+      date_format = '%Y-%m-%d-%a',
+      time_format = '%H:%M',
+      tags = '',
+    },
+  },
+
+  -- NOTE:
+  -- NOTE: you can add more plugins here
+  -- NOTE:
+
+  -- NOTE:
+  -- NOTE: you can add more plugins here
+  -- NOTE:
 
   -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
